@@ -11,6 +11,9 @@ mensaje.
 numérico (llamado código ASCII) y letras consecutivas tienen números consecutivos."""
 
 def codigo_cesar(mensaje, clave) :
+    # El objetivo de esta funcion es sustituir cada letra del "mensaje" por otra letra mediante la suma del código ASCII de determinada letra + la "clave". Es distinto para mayusculas y minusculas.
+    # Suele pasar que determinada letra se sustituya por un simbolo y no por una letra. En ese caso a la suma del código ASCII de determinada letra + la "clave" le restamos el total de "26" (total de las letras del abecedario)
+    # Lo mismo hacemos con los numeros. Los simbolos no se modifican. 
     """
     >>> codigo_cesar ("%&2345Pm ", 3)
     '%&5678Sp '
@@ -42,12 +45,15 @@ def codigo_cesar(mensaje, clave) :
             
         if 32 <= ord(caracter) <= 47 :
             cadena_cifrada += chr(ord(caracter))
-            
-             
-                
+                       
     return cadena_cifrada
+
 import doctest
-print(doctest.testmod())            
+print(doctest.testmod())
+       
+    
+    
+          
             
             
     
