@@ -27,24 +27,28 @@ def codigo_cesar(mensaje, clave) :
     
     """
     cadena_cifrada = ""
+    total_abecedario = 26
+    total_numeros = 10
+    comienza_simbolo = 32
+    termina_simbolo = 47
     for caracter in mensaje :
         if caracter.islower() :
             if ord(caracter) + clave > ord("z") :
-                cadena_cifrada += chr((ord(caracter) + clave) - 26) 
+                cadena_cifrada += chr((ord(caracter) + clave) - total_abecedario) 
             else:
                 cadena_cifrada += chr(ord(caracter) + clave)
         if caracter.isupper() :
             if ord(caracter) + clave > ord("Z") :
-                cadena_cifrada += chr((ord(caracter) + clave) - 26)
+                cadena_cifrada += chr((ord(caracter) + clave) - total_abecedario)
             else:
                 cadena_cifrada += chr(ord(caracter) + clave)  
         if caracter.isnumeric() :
             if ord(caracter) + clave > ord("9") :
-                cadena_cifrada += chr((ord(caracter) + clave) - 10)
+                cadena_cifrada += chr((ord(caracter) + clave) - total_numeros)
             else:
                 cadena_cifrada += chr(ord(caracter) + clave)
             
-        if 32 <= ord(caracter) <= 47 :
+        if comienza_simbolo <= ord(caracter) <= termina_simbolo :
             cadena_cifrada += chr(ord(caracter))
                        
     return cadena_cifrada
