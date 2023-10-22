@@ -52,7 +52,10 @@ def codigo_cesar(mensaje, clave) :
 import doctest
 print(doctest.testmod())
        
-    
+print(codigo_cesar("EJERCICIO", 26))
+print(codigo_cesar ("ejercicio", 28))
+print(codigo_cesar("EJERCICIO", -5))
+print(codigo_cesar ("ejercicio", -3))      
     
           
             
