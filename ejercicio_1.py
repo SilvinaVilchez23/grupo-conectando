@@ -14,7 +14,7 @@ def codigo_cesar(mensaje, clave) :
     # El objetivo de esta funcion es sustituir cada letra del "mensaje" por otra letra mediante la suma del código ASCII de determinada letra + la "clave". Es distinto para mayusculas y minusculas.
     # Suele pasar que determinada letra se sustituya por un simbolo y no por una letra. En ese caso a la suma del código ASCII de determinada letra + la "clave" le restamos el total de "26" (total de las letras del abecedario)
     # Lo mismo hacemos con los numeros. Los simbolos no se modifican. 
-    # Autor : Silvina
+    # Autor : Silvina y Brian
     """
     >>> codigo_cesar ("%&2345Pm ", 3)
     '%&5678Sp '
@@ -29,28 +29,24 @@ def codigo_cesar(mensaje, clave) :
     cadena_cifrada = ""
     total_abecedario = 26
     total_numeros = 10
-    comienza_simbolo = 32
-    termina_simbolo = 47
     for caracter in mensaje :
-        if caracter.islower() :
-            if ord(caracter) + clave > ord("z") :
-                cadena_cifrada += chr((ord(caracter) + clave) - total_abecedario) 
-            else:
-                cadena_cifrada += chr(ord(caracter) + clave)
-        if caracter.isupper() :
-            if ord(caracter) + clave > ord("Z") :
-                cadena_cifrada += chr((ord(caracter) + clave) - total_abecedario)
-            else:
-                cadena_cifrada += chr(ord(caracter) + clave)  
-        if caracter.isnumeric() :
-            if ord(caracter) + clave > ord("9") :
-                cadena_cifrada += chr((ord(caracter) + clave) - total_numeros)
-            else:
-                cadena_cifrada += chr(ord(caracter) + clave)
-            
-        if comienza_simbolo <= ord(caracter) <= termina_simbolo :
+        caracter_cifrado = (ord(caracter) + clave)
+        if ord("a") <= caracter_cifrado <= ord("z") :
+            cadena_cifrada += chr(caracter_cifrado)
+        elif caracter_cifrado > ord("z") :
+            cadena_cifrada += chr((caracter_cifrado - total_abecedario))
+        elif ord("A") <= caracter_cifrado <= ord("Z") :
+            cadena_cifrada += chr(caracter_cifrado)
+        elif caracter_cifrado > ord("Z") :
+            cadena_cifrada += chr((caracter_cifrado - total_abecedario))
+        elif ord("0") <= caracter_cifrado <= ord("9") :
+            cadena_cifrada += chr(caracter_cifrado)
+        elif caracter_cifrado > ord("9") :
+            cadena_cifrada += chr((caracter_cifrado - total_numeros))
+        else:
             cadena_cifrada += chr(ord(caracter))
-                       
+        
+        
     return cadena_cifrada
 
 import doctest
