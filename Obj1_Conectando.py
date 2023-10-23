@@ -1,19 +1,7 @@
-"""El cifrado de César sustituye cada letra del mensaje por otra. La letra sustituida se obtiene
-“desplazando” cada letra del abecedario una cierta cantidad de posiciones a la derecha. Esta
-cantidad de lugares que una letra se desplaza es la clave secreta que se debe pasar al receptor del
-mensaje para poder descifrarlo.
-Consideraciones
-● Se deben considerar tanto las letras mayúsculas como minúsculas.
-● Adapte el método para encriptar de forma similar los dígitos numéricos que pueda tener el
-mensaje.
-● Los espacios y otros símbolos no se codifican, quedan igual.
-● Sugerimos que lean sobre las funciones ord() y chr(). Cada letra tiene asignado un código
-numérico (llamado código ASCII) y letras consecutivas tienen números consecutivos."""
-
 def codigo_cesar(mensaje, clave) :
-    # El objetivo de esta funcion es sustituir cada letra del "mensaje" por otra letra mediante la suma del código ASCII de determinada letra + la "clave". Separamos en 3 partes.
-    # La primera si solo contiene caracteres alfabéticos, la segunda si es numerico y la tercera si no es ninguna de las anteriores, no se modifican (serian los simbolos).
-    # Suele pasar que determinada letra se sustituya por un simbolo y no por una letra. En ese caso a la suma del código ASCII de determinada letra + la "clave" le restamos el total de "26" (total de las letras del abecedario). 
+    # El objetivo de esta funcion es sustituir cada letra del "mensaje" por otra letra mediante la suma del código ASCII de determinada letra + la "clave". Es distinto para mayusculas y minusculas.
+    # Suele pasar que determinada letra se sustituya por un simbolo y no por una letra. En ese caso a la suma del código ASCII de determinada letra + la "clave" le restamos el total de "26" (total de las letras del abecedario)
+    # Lo mismo hacemos con los numeros. Los simbolos no se modifican. 
     # Autor : Silvina y Brian
     """
     >>> codigo_cesar ("%&2345Pm ", 3)
@@ -24,54 +12,56 @@ def codigo_cesar(mensaje, clave) :
     'glgtekekq'
     >>> codigo_cesar ("1 23456789", 4)
     '5 67890123'
-    >>> codigo_cesar ("# @ 42Jg", 1) 
-    '# @ 53Kh'
-    >>> codigo_cesar ("HOLA mundo", 5)
+    >>> codigo_cesar ("EJERCICIO", 8)
+    'MRMZKQKQW'
+    >>> codigo_cesar("EJERCICIO", 77)
+    'DIDQBHBHN'
+    >>> codigo_cesar ("ejercicio", -52)
+    'ejercicio'
+    >>> codigo_cesar ("HOLA mundo", 31)
     'MTQF rzsit'
     >>> codigo_cesar ("89 ?:", 9) 
     '78 ?:'
     >>> codigo_cesar ("EjerCIciO1#", 3)
     'HmhuFLflR4#'
-    >>> codigo_cesar ("*{}|/", 10) 
+    >>> codigo_cesar ("*{}|/", 18) 
     '*{}|/'
     >>> codigo_cesar ("|(._.)|", 9) 
     '|(._.)|'
     
+
     """
+    TOTAL_ABECEDARIO = 26 
+    TOTAL_NUMEROS = 10
+    while 0 > clave or clave > TOTAL_ABECEDARIO:
+        if clave < 0:
+           clave += TOTAL_ABECEDARIO
+        else: 
+           clave -= TOTAL_ABECEDARIO
+
     cadena_cifrada = ""
-    total_abecedario = 26
-    total_numeros = 10
     for caracter in mensaje :
-        if caracter.isalpha() :
-            valor_caracter = ord(caracter)
-            if "a" <= caracter <= "z" :
-                nuevo_valor_caracter = valor_caracter + clave
-                if nuevo_valor_caracter > ord("z") :
-                    nuevo_valor_caracter = nuevo_valor_caracter - total_abecedario
-            elif "A" <= caracter <= "Z" :
-                nuevo_valor_caracter = valor_caracter + clave
-                if nuevo_valor_caracter > ord("Z") :
-                    nuevo_valor_caracter = nuevo_valor_caracter - total_abecedario
-            cadena_cifrada += chr(nuevo_valor_caracter)
-            
-        elif caracter.isnumeric() :
-            valor_caracter = ord(caracter)
-            if "0" <= caracter <= "9" :
-                nuevo_valor_caracter = valor_caracter + clave
-                if nuevo_valor_caracter > ord("9") :
-                    nuevo_valor_caracter = nuevo_valor_caracter - total_numeros
-            cadena_cifrada += chr(nuevo_valor_caracter)
-        else:
-            cadena_cifrada += caracter
         
+        caracter_cifrado = ord(caracter) + clave
+
+        if not caracter.isalnum() :
+            cadena_cifrada += chr(ord(caracter))
+
+        elif ord("z") < caracter_cifrado <= ord("z") + clave :
+          cadena_cifrada += chr((caracter_cifrado) - TOTAL_ABECEDARIO)
+
+        elif ord("Z") < caracter_cifrado <= ord("Z") + clave :
+          cadena_cifrada += chr((caracter_cifrado) - TOTAL_ABECEDARIO)
+
+        elif ord("9") < caracter_cifrado <= ord("9") + clave :
+            cadena_cifrada += chr((caracter_cifrado) - TOTAL_NUMEROS)
+
+
+        else :
+           cadena_cifrada += chr(caracter_cifrado)
         
+                    
     return cadena_cifrada
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()
-
-
-
-            
     
+import doctest
+print(doctest.testmod())
