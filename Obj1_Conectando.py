@@ -42,23 +42,27 @@ def codigo_cesar(mensaje, clave) :
     total_abecedario = 26
     total_numeros = 10
     for caracter in mensaje :
-        caracter_cifrado = (ord(caracter) + clave)
         if caracter.isalpha() :
-            if ord("a") <= caracter_cifrado <= ord("z") :
-                cadena_cifrada += chr(caracter_cifrado)
-            elif caracter_cifrado > ord("z") :
-                cadena_cifrada += chr((caracter_cifrado - total_abecedario))
-            elif ord("A") <= caracter_cifrado <= ord("Z") :
-                cadena_cifrada += chr(caracter_cifrado)
-            elif caracter_cifrado > ord("Z") :
-                cadena_cifrada += chr((caracter_cifrado - total_abecedario))
+            valor_caracter = ord(caracter)
+            if "a" <= caracter <= "z" :
+                nuevo_valor_caracter = valor_caracter + clave
+                if nuevo_valor_caracter > ord("z") :
+                    nuevo_valor_caracter = nuevo_valor_caracter - total_abecedario
+            elif "A" <= caracter <= "Z" :
+                nuevo_valor_caracter = valor_caracter + clave
+                if nuevo_valor_caracter > ord("Z") :
+                    nuevo_valor_caracter = nuevo_valor_caracter - total_abecedario
+            cadena_cifrada += chr(nuevo_valor_caracter)
+            
         elif caracter.isnumeric() :
-            if ord("0") <= caracter_cifrado <= ord("9") :
-                cadena_cifrada += chr(caracter_cifrado)
-            elif caracter_cifrado > ord("9") :
-                cadena_cifrada += chr((caracter_cifrado - total_numeros))
+            valor_caracter = ord(caracter)
+            if "0" <= caracter <= "9" :
+                nuevo_valor_caracter = valor_caracter + clave
+                if nuevo_valor_caracter > ord("9") :
+                    nuevo_valor_caracter = nuevo_valor_caracter - total_numeros
+            cadena_cifrada += chr(nuevo_valor_caracter)
         else:
-            cadena_cifrada += chr(ord(caracter))
+            cadena_cifrada += caracter
         
         
     return cadena_cifrada
@@ -67,8 +71,7 @@ if __name__ == '__main__':
     import doctest
     doctest.testmod()
 
-    
-          
-            
+
+
             
     
