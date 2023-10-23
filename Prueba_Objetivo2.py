@@ -4,17 +4,18 @@ mensaje cifrado, mediante el cifrado atbash. Probarla utilizando doctest, con al
 casos diferentes."""
 
 def Cifrado_Atbash (mensaje):
-    # El objetivo de esta funcion es recorrer caracter por caracter todo el mensaje recibido. Luego verificamos que si el caracter se encuentra en algunas de las cadenas creadas del abecedario, entonces 
-    # hallo la posicion del caracter en la cadena donde se encuentra y esa posicion sera la posicion del caracter pero de la cadena contraria del abecedario.
-    # Con los numeros pasa casi lo mismo pero haciendo uso de la resta y del código ASCII. Si el caracter es un simbolo o espacio no se modicia. 
-    # autor : Brian
+    # La funcion Cifrado_Atbash va a recibir una cadena como mensaje e ira recorriendo cada caracter de ese mensaje.
+    # Se crearan 4 cadenas, un abecedario de mayusculas, otro de minusculas, uno de numeros y uno vacio
+    # Si el caracter se encuentra en algunas de las cadenas creadas del abecedario, se usara esa posicion en la cadena del otro abecedario. Se agregara el caracter obtenido a la cadena vacia.
+    # Con los numeros pasa casi lo mismo pero haciendo uso de la resta y del código ASCII. Si el caracter no es alfanumerico no se modifica. 
+    # Autor : Brian
     """
     >>> Cifrado_Atbash ("HOLA MUNDO")
     'sloz ñfnwl'
     >>> Cifrado_Atbash ("hola mundo")
     'SLOZ ÑFNWL'
-    >>> Cifrado_Atbash ("HOLA mundo")
-    'sloz ÑFNWL'
+    >>> Cifrado_Atbash ("SLOZ ÑFNWL")
+    'hola mundo'
     >>> Cifrado_Atbash ("AbCdEfG")
     'zYxWvUt'
     >>> Cifrado_Atbash ("238129")
@@ -43,8 +44,7 @@ def Cifrado_Atbash (mensaje):
             nuevo_mensaje += abc_minuscula[abc_mayuscula.index(caracter)]
         elif caracter in numeros :
             nuevo_mensaje += chr(ord("9") - numeros.index(caracter))
-        else:
-            nuevo_mensaje += caracter
+            
     return nuevo_mensaje
 
 if __name__ == '__main__':
