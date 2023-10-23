@@ -24,11 +24,24 @@ def codigo_cesar(mensaje, clave) :
     'glgtekekq'
     >>> codigo_cesar ("1 23456789", 4)
     '5 67890123'
+    >>> codigo_cesar ("# @ 42Jg", 1) 
+    '# @ 53Kh'
+    >>> codigo_cesar ("HOLA mundo", 5)
+    'MTQF rzsit'
+    >>> codigo_cesar ("89 ?:", 9) 
+    '78 ?:'
+    >>> codigo_cesar ("EjerCIciO1#", 3)
+    'HmhuFLflR4#'
+    >>> codigo_cesar ("*{}|/", 10) 
+    '*{}|/'
+    >>> codigo_cesar ("|(._.)|", 40) 
+    '|(._.)|'
     
     """
     cadena_cifrada = ""
     total_abecedario = 26
     total_numeros = 10
+    
     for caracter in mensaje :
         caracter_cifrado = (ord(caracter) + clave)
         if ord("a") <= caracter_cifrado <= ord("z") :
