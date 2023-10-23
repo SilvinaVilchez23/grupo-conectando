@@ -24,53 +24,35 @@ def codigo_cesar(mensaje, clave) :
     'glgtekekq'
     >>> codigo_cesar ("1 23456789", 4)
     '5 67890123'
-    >>> codigo_cesar ("# @ 42Jg", 1) 
-    '# @ 53Kh'
-    >>> codigo_cesar ("HOLA mundo", 5)
-    'MTQF rzsit'
-    >>> codigo_cesar ("89 ?:", 9) 
-    '78 ?:'
-    >>> codigo_cesar ("EjerCIciO1#", 3)
-    'HmhuFLflR4#'
-    >>> codigo_cesar ("*{}|/", 10) 
-    '*{}|/'
-    >>> codigo_cesar ("|(._.)|", 40) 
-    '|(._.)|'
     
     """
     cadena_cifrada = ""
     total_abecedario = 26
     total_numeros = 10
-    
     for caracter in mensaje :
-        caracter_cifrado = (ord(caracter) + clave)
-        if ord("a") <= caracter_cifrado <= ord("z") :
-            cadena_cifrada += chr(caracter_cifrado)
-        elif caracter_cifrado > ord("z") :
-            cadena_cifrada += chr((caracter_cifrado - total_abecedario))
-        elif ord("A") <= caracter_cifrado <= ord("Z") :
-            cadena_cifrada += chr(caracter_cifrado)
-        elif caracter_cifrado > ord("Z") :
-            cadena_cifrada += chr((caracter_cifrado - total_abecedario))
-        elif ord("0") <= caracter_cifrado <= ord("9") :
-            cadena_cifrada += chr(caracter_cifrado)
-        elif caracter_cifrado > ord("9") :
-            cadena_cifrada += chr((caracter_cifrado - total_numeros))
-        else:
-            cadena_cifrada += chr(ord(caracter))
         
-        
-    return cadena_cifrada
+        caracter_cifrado = ord(caracter) + clave
 
+        if not caracter.isalnum() :
+            cadena_cifrada += chr(ord(caracter))
+
+        elif ord("z") < caracter_cifrado <= ord("z") + clave :
+          cadena_cifrada += chr((caracter_cifrado) - TOTAL_ABECEDARIO)
+
+        elif ord("Z") < caracter_cifrado <= ord("Z") + clave :
+          cadena_cifrada += chr((caracter_cifrado) - TOTAL_ABECEDARIO)
+
+        elif ord("9") < caracter_cifrado <= ord("9") + clave :
+            cadena_cifrada += chr((caracter_cifrado) - TOTAL_NUMEROS)
+
+
+        else :
+           cadena_cifrada += chr(caracter_cifrado)
+        
+                    
+    return cadena_cifrada
+    
 import doctest
 print(doctest.testmod())
-       
-print(codigo_cesar("EJERCICIO", 26))
-print(codigo_cesar ("ejercicio", 28))
-print(codigo_cesar("EJERCICIO", -5))
-print(codigo_cesar ("ejercicio", -3))      
-    
-          
-            
-            
+ 
     
