@@ -17,8 +17,6 @@ def abrir_ventana_principal():
     
     msj= StringVar() 
     clav = IntVar()
-    msj2 = msj.get()
-    clave2 = clav.get()
     
     escribe_mensaje = Label(Miframe, text= "ingrese un mensaje: ")
     escribe_mensaje.grid(row=0,column=0)
@@ -26,19 +24,6 @@ def abrir_ventana_principal():
     escribe_clave = Label(Miframe, text="ingrese una clave(si es necesario): ")
     escribe_clave.grid(row=1,column=0)
 
-    # Botones para cifrar y descifrar
-    boton_cifrar_cesar = Button(ventana_principal, text="Cifrar mensaje César", command=lambda: cifrar_cesar(msj2, clave2))
-    boton_cifrar_atbash = Button(ventana_principal, text="Cifrar mensaje Atbash", command=lambda:cifrar_atbash(msj2))
-    boton_descifrar_cesar = Button(ventana_principal, text="Descifrar mensaje César", command=lambda:descifrar_cesar(msj2, clave2))
-    boton_descifrar_atbash = Button(ventana_principal, text="Descifrar mensaje Atbash", command=lambda:descifrar_atbash(msj2))
-
-    boton_cifrar_cesar.pack()
-    boton_cifrar_atbash.pack()
-    boton_descifrar_cesar.pack()
-    boton_descifrar_atbash.pack()
-
-    
-    
     ingresar_mensaje = Entry(Miframe, textvariable= msj)
     ingresar_mensaje.grid(row=0,column=1)
 
@@ -47,6 +32,28 @@ def abrir_ventana_principal():
     
     resultado =Label(ventana_principal, text="Resultado: ", font=(None, 12))
     resultado.pack()
+
+    command_cifrar_cesar =lambda: resultado.config(text="Resultado: "+ cifrar_cesar(msj.get, clav.get))
+    command_cifrar_atbash =lambda: resultado.config(text="Resultado: "+ cifrar_atbash(msj.get))
+    command_descifrar_cesar =lambda: resultado.config(text="Resultado: "+ descifrar_cesar(msj.get, clav.get))
+    command_descifrar_atbash =lambda: resultado.config(text="Resultado: "+ descifrar_atbash(msj.get))
+
+
+    # Botones para cifrar y descifrar
+    boton_cifrar_cesar = Button(ventana_principal, text="Cifrar mensaje César", command=command_cifrar_cesar)
+    boton_cifrar_atbash = Button(ventana_principal, text="Cifrar mensaje Atbash", command=command_cifrar_atbash)
+    boton_descifrar_cesar = Button(ventana_principal, text="Descifrar mensaje César", command=command_descifrar_cesar)
+    boton_descifrar_atbash = Button(ventana_principal, text="Descifrar mensaje Atbash", command=command_descifrar_atbash)
+
+    boton_cifrar_cesar.pack()
+    boton_cifrar_atbash.pack()
+    boton_descifrar_cesar.pack()
+    boton_descifrar_atbash.pack()
+
+    
+    
+    
+    
     
     ventana_principal.mainloop()
     
