@@ -1,6 +1,6 @@
 from tkinter import *
-from tkinter import messagebox
 # autores: Alan, Maria y Silvina 
+# version: 1.5 no terminada
 
 def abrir_ventana_principal():
     # Esta funcion se encarga de eliminar la ventana de bienvenida y crear otra. En este codigo, tendrá una entrada de texto donde el usuario ingresará el mensaje que desea cifrar
