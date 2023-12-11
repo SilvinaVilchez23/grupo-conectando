@@ -51,8 +51,10 @@ def validacion_usuario(id_usuario):
         resultado_final = False
     return resultado_final
 
-import doctest
-print(doctest.testmod())                
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()  
+                           
         
         
     
