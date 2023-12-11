@@ -1,5 +1,26 @@
-
 def Cifrado_Atbash (mensaje):
+    """
+    >>> Cifrado_Atbash ("HOLA MUNDO")
+    'sloz ñfnwl'
+    >>> Cifrado_Atbash ("hola mundo")
+    'SLOZ ÑFNWL'
+    >>> Cifrado_Atbash ("SLOZ ÑFNWL")
+    'hola mundo'
+    >>> Cifrado_Atbash ("AbCdEfG")
+    'zYxWvUt'
+    >>> Cifrado_Atbash ("238129")
+    '761870'
+    >>> Cifrado_Atbash ("HOla5 1muNDo7")
+    'slOZ4 8ÑFnwL2'
+    >>> Cifrado_Atbash ("@#?!-")
+    '@#?!-'
+    >>> Cifrado_Atbash ("EJERCICIO2@€%ejercicio2@€%")
+    'vqvixrxrl7@€%VQVIXRXRL7@€%'
+    >>> Cifrado_Atbash ("abcdefghijklmnñopqrstuvwxyz")
+    'ZYXWVUTSRQPOÑNMLKJIHGFEDCBA'
+    >>> Cifrado_Atbash ("ABCDEFGHIJKLMNÑOPQRSTUVWXYZ")
+    'zyxwvutsrqpoñnmlkjihgfedcba'
+    """
     
     abc_minuscula = "abcdefghijklmnñopqrstuvwxyz"
     abc_mayuscula = "ZYXWVUTSRQPOÑNMLKJIHGFEDCBA"
@@ -18,3 +39,6 @@ def Cifrado_Atbash (mensaje):
             nuevo_mensaje += caracter
     return nuevo_mensaje
 
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()

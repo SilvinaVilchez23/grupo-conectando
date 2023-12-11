@@ -46,5 +46,6 @@ def codigo_cesar(mensaje, clave):
         
     return (cadena_cifrada)
     
-import doctest
-print(doctest.testmod())
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
