@@ -28,15 +28,22 @@ def validacion_usuario(id_usuario):
     letras_y_numeros = "abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890"
     tiene_letras_num = False
     tiene_caracteres_permitidos = False
+    i = 0
     
     if 5 <= longitud <= 15 :
-        for caracter in id_usuario:
-            if caracter in letras_y_numeros :
-                tiene_letras_num = True
-            elif caracter in caracteres_permitidos:
-                tiene_caracteres_permitidos = True
-            else :
-                return False
+        resultado = True
+    else:
+        resultado = False
+        
+    while (resultado) and i < longitud:
+        caracter = id_usuario[i]
+        if caracter in letras_y_numeros :
+            tiene_letras_num = True
+        elif caracter in caracteres_permitidos:
+            tiene_caracteres_permitidos = True
+        else :
+            resultado = False
+        i += 1
                 
     if tiene_letras_num and tiene_caracteres_permitidos :
         resultado_final = True
@@ -44,11 +51,8 @@ def validacion_usuario(id_usuario):
         resultado_final = False
     return resultado_final
 
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()  
-            
-                
+import doctest
+print(doctest.testmod())                
         
         
     
