@@ -43,26 +43,29 @@ def ventana_creacion_usuario():
         # Función para crear un nuevo usuario.
         id_usuario = ingresar_id_usuario.get()
         clave_usuario = ingresar_clave_usuario.get()
-        guardar_pregunta = variable_pregunta.get()
-        guardar_respuesta = ingresar_respuesta.get()
+        id_pregunta = variable_pregunta.get()
+        respuesta_recuperacion = ingresar_respuesta.get()
+        intentos_recuperacion = 0
 
         # Validar el identificador del usuario.
         if not validar_usuario.validacion_usuario(id_usuario):
             resultado = messagebox.showerror("Error", "Identificador no válido")
+            
         # Validar la clave del usuario.
         elif not validar_clave.validacion_clave(clave_usuario):
             resultado = messagebox.showerror("Error", "Clave no válida")
+            
         # checkeo que no sea un usuario existente.
         elif checkeo_usuario(id_usuario):
             resultado = messagebox.showerror("Error", "Identificador en uso")
+            
+        
         else:
-            resultado = salvar_usuario([id_usuario, clave_usuario, guardar_pregunta, guardar_respuesta, 0])
+            resultado = salvar_usuario([id_usuario, clave_usuario, id_pregunta, respuesta_recuperacion, intentos_recuperacion])
             messagebox.showinfo("Éxito", "Usuario creado correctamente")
             ventana_creacion_usuario.destroy()
-            
         return resultado
-    
-    # Guardo los datos del nuevo usuario en el archivo CSV.
+                
     ventana_crear = Tk()
     ventana_crear.title("Sistema de Registro de Usuarios")
     ventana_crear.config(bg="pink")
@@ -203,7 +206,7 @@ def recuperacion_clave_ventana(datos_usuario):
     ventana_recuperacion_clave.iconbitmap(r"icono.ico")
     ventana_recuperacion_clave.title("Recuperacion clave")
 
-    pregunta_guardada_id = (cargar_dato_usuario(datos_usuario)[2])
+    pregunta_guardada_id = cargar_dato_usuario(datos_usuario)
     pregunta_texto = pregunta_guardada_id
     
     pregunta_recuperacion = Label(ventana_recuperacion_clave, text=f"Pregunta de recuperacion : {pregunta_texto}")
@@ -240,10 +243,13 @@ def cargar_dato_usuario(datos_usuario):
     # funcion que devuelve toda la info de una fila.
     with open("usuarios.csv", "r") as archivo:
         linea = csv.reader(archivo)
-        for fila in linea:
-            if fila and fila[0] == datos_usuario:
-                return fila
-    return None
+        for fila_us in linea:
+            if fila_us and fila_us[0] == datos_usuario:
+                with open("preguntas.csv", "r") as csvfile:
+                    linea = csv.reader(csvfile)
+                    for fila_preg in linea:
+                        if fila_preg[0] == fila_us[2] :
+                            return fila_preg[1]
 
 def incremento_intentos(datos_usuario):
     # funcion que vigila los intentos ingresados, si es igual o se pasa de 3 intentos fallidos, bloquea al usuario mediante
